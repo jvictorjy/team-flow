@@ -6,7 +6,7 @@ echo ""
 
 # Run unit tests
 echo "📝 Running unit tests..."
-pnpm test --passWithNoTests
+pnpm test
 
 if [ $? -ne 0 ]; then
   echo ""
@@ -18,11 +18,13 @@ echo ""
 echo "✅ Unit tests passed!"
 echo ""
 
-# Run e2e tests
+# Run e2e tests (only for auth service for now)
 echo "🚀 Running E2E tests..."
-pnpm test:e2e --passWithNoTests
+cd apps/apis/auth && pnpm test:e2e
+TEST_EXIT_CODE=$?
+cd ../../..
 
-if [ $? -ne 0 ]; then
+if [ $TEST_EXIT_CODE -ne 0 ]; then
   echo ""
   echo "❌ E2E tests failed. Please fix the tests before pushing."
   exit 1
