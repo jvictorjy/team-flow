@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running tests before push..."
+echo ""
+
+# Run unit tests
+echo "📝 Running unit tests..."
+pnpm test --passWithNoTests
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ Unit tests failed. Please fix the tests before pushing."
+  exit 1
+fi
+
+echo ""
+echo "✅ Unit tests passed!"
+echo ""
+
+# Run e2e tests
+echo "🚀 Running E2E tests..."
+pnpm test:e2e --passWithNoTests
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ E2E tests failed. Please fix the tests before pushing."
+  exit 1
+fi
+
+echo ""
+echo "✅ E2E tests passed!"
+echo ""
+echo "🎉 All tests passed! Proceeding with push..."
+

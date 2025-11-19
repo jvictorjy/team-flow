@@ -22,10 +22,45 @@
     "start:auth": "pnpm --filter auth start",
     "start:web": "pnpm --filter web start",
     "clean": "rimraf \"apps/apis/**/dist\" \"apps/web/.next\"",
-    "clean:all": "pnpm --parallel --filter \"./apps/**\" clean && rimraf node_modules"
+    "clean:all": "pnpm --parallel --filter \"./apps/**\" clean && rimraf node_modules",
+    "test": "jest --projects apps/apis/auth apps/apis/gateway",
+    "test:auth": "pnpm --filter auth test",
+    "test:gateway": "pnpm --filter gateway test",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:e2e": "jest --config jest.e2e.config.js",
+    "test:ci": "jest --coverage --ci --maxWorkers=2",
+    "lint": "eslint \"{apps,packages}/**/*.{ts,tsx}\"",
+    "format": "prettier --write \"{apps,packages}/**/*.{ts,tsx,js,json,md}\"",
+    "format:check": "prettier --check \"{apps,packages}/**/*.{ts,tsx,js,json,md}\"",
+    "prepare": "husky install"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@swc/core": "^1.15.2",
+    "@swc/jest": "^0.2.39",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^6.0.3",
     "concurrently": "^9.0.0",
-    "rimraf": "^6.0.1"
+    "husky": "^9.1.7",
+    "jest": "^30.2.0",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.7.1",
+    "rimraf": "^6.0.1",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

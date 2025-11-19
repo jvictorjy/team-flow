@@ -1,5 +1,6 @@
-import Fastify from 'fastify';
 import cors from '@fastify/cors';
+
+import Fastify from 'fastify';
 
 const PORT = Number(process.env.PORT || 3333);
 
@@ -8,7 +9,11 @@ async function buildServer() {
 
   await app.register(cors, { origin: true });
 
-  app.get('/health', async () => ({ status: 'ok', service: 'api', time: new Date().toISOString() }));
+  app.get('/health', async () => ({
+    status: 'ok',
+    service: 'api',
+    time: new Date().toISOString(),
+  }));
 
   app.get('/', async () => ({ name: 'TeamFlow API', version: '0.1.0' }));
 

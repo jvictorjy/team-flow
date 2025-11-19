@@ -1,12 +1,15 @@
-import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
+import 'reflect-metadata';
+
 import { AppModule } from './app.module';
 
-
 const PORT = Number(process.env.PORT || 3000);
-const ORIGINS = (process.env.CORS_ORIGINS || 'http://localhost:5173,http://localhost:3000').split(',');
+const ORIGINS = (process.env.CORS_ORIGINS || 'http://localhost:5173,http://localhost:3000').split(
+  ',',
+);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, new FastifyAdapter({ logger: true }));
