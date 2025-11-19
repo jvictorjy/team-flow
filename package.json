@@ -1,0 +1,31 @@
+{
+  "name": "team-flow",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "concurrently -n gateway,web -c blue,green \"pnpm --filter gateway dev\" \"pnpm --filter web dev\"",
+    "dev:api": "pnpm --filter api dev",
+    "dev:gateway": "pnpm --filter gateway dev",
+    "dev:auth": "pnpm --filter auth dev",
+    "dev:web": "pnpm --filter web dev",
+    "dev:all": "pnpm --parallel --filter \"./apps/**\" dev",
+    "build": "pnpm --filter gateway build && pnpm --filter auth build && pnpm --filter web build",
+    "build:api": "pnpm --filter api build",
+    "build:gateway": "pnpm --filter gateway build",
+    "build:auth": "pnpm --filter auth build",
+    "build:web": "pnpm --filter web build",
+    "build:all": "pnpm --filter \"./apps/**\" build",
+    "start": "concurrently -n gateway,web -c blue,green \"pnpm --filter gateway start\" \"pnpm --filter web start\"",
+    "start:api": "pnpm --filter api start",
+    "start:gateway": "pnpm --filter gateway start",
+    "start:auth": "pnpm --filter auth start",
+    "start:web": "pnpm --filter web start",
+    "clean": "rimraf \"apps/apis/**/dist\" \"apps/web/.next\"",
+    "clean:all": "pnpm --parallel --filter \"./apps/**\" clean && rimraf node_modules"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "rimraf": "^6.0.1"
+  }
+}

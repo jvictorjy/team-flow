@@ -1,0 +1,18 @@
+# Usar um único lockfile na raiz
+shared-workspace-lockfile=true
+
+# Auto-instalar peer dependencies
+auto-install-peers=true
+strict-peer-dependencies=false
+
+# Configurações de hoist (segurança)
+hoist=false
+shamefully-hoist=false
+public-hoist-pattern[]=*eslint*
+public-hoist-pattern[]=*prettier*
+
+# Link workspace packages
+link-workspace-packages=true
+
+# Node version (opcional, ajuste conforme seu projeto)
+# engine-strict=true
